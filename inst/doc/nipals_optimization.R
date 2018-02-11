@@ -92,9 +92,6 @@ knitr::opts_chunk$set(echo = TRUE)
 #  # TRUE
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  apply(!x.miss, 2, function(x) { sum(ph2[x]) } )
-
-## ---- eval=FALSE---------------------------------------------------------
 #  set.seed(42)
 #  P = matrix(rnorm(9), 3)
 #  PPp = P %*% t(P)

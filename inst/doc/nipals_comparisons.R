@@ -24,10 +24,11 @@
 #  B2a <- apply(B2, 2, function(x) {
 #    n <- sum(!is.na(x))
 #    x <- x - mean(x, na.rm=TRUE)
-#    x <- x / ( sd(x, na.rm=TRUE) * (n-1) / n )
+#    x <- x / ( sd(x, na.rm=TRUE) * sqrt((n-1) / n ))
 #  })
 #  
-#  mnip <- nipals::nipals(B2a, ncomp=5, center=FALSE, scale=FALSE, fitted=TRUE, maxiter=500, tol=1e-9, gramschmidt=FALSE)
+#  mnip <- nipals::nipals(B2a, ncomp=5, center=FALSE, scale=FALSE,
+#                         fitted=TRUE, maxiter=500, tol=1e-9, gramschmidt=FALSE)
 
 ## ---- eval=FALSE---------------------------------------------------------
 #  # data
@@ -36,9 +37,9 @@
 #  
 #  # eigenvalues, ade4 uses squared singular values / n-1
 #  mnip$eig
-#  # [1] 5.7452644 2.4886658 1.2653580 0.2839543 0.1704078
+#  # [1] 5.2913781 2.2555596 1.1651281 0.2590878 0.1563175
 #  made$eig
-#  # [1] 5.50135937 1.03224198 0.26685613 0.01343861 0.00483985
+#  # [1] 4.666454778 0.847924398 0.226254436 0.011187921 0.004072542
 #  same(mnip$eig ^ 2 / (nrow(B2a)-1), made$eig)
 #  # TRUE
 #  
@@ -63,7 +64,7 @@
 #  # [1] 4.8762167 2.0442757 1.0728055 0.2369607 0.1432779
 #  mpls$values[,1]
 #  # [1] 3.963172007 0.696484184 0.191839875 0.009366425 0.003421661
-#  same(m.nip$eval, sqrt(mpls$values[,1] * 6) )
+#  same(mnip$eig, sqrt(mpls$values[,1] * 6) )
 #  # TRUE
 #  
 #  # P loadings

@@ -2,6 +2,7 @@
 options(width=90)
 
 ## ---------------------------------------------------------------------------------------
+require(nipals)
 B <- matrix(c(50, 67, 90, 98, 120,
               55, 71, 93, 102, 129,
               65, 76, 95, 105, 134,
@@ -15,8 +16,8 @@ m0 <- svd(scale(B)) # center and scale
 
 ## ---------------------------------------------------------------------------------------
 require("nipals")
-m1 <- nipals(B2, gramschmidt=FALSE)
-m2 <- nipals(B2, gramschmidt=TRUE)
+m1 <- nipals::nipals(B2, gramschmidt=FALSE)
+m2 <- nipals::nipals(B2, gramschmidt=TRUE)
 
 ## ---------------------------------------------------------------------------------------
 round( m1$eig, 3)
