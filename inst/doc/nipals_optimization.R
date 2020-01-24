@@ -1,22 +1,22 @@
-## ----setup, include=FALSE------------------------------------------------
+## ----setup, include=FALSE---------------------------------------------------------------
 knitr::opts_chunk$set(echo = TRUE)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE------------------------------------------------------------------------
 #  v = rnorm(1e8) # 100 million
-#  system.time(sum(v*v))
-#  #   user  system elapsed
-#  #   0.24    0.17    0.40
 #  system.time(crossprod(v))
 #  #   user  system elapsed
 #  #   0.24    0.00    0.23
-#  
-#  v = rnorm(1e9) # 1000 million
 #  system.time(sum(v*v))
 #  #   user  system elapsed
-#  #   3.25   45.71  141.76
+#  #   0.24    0.17    0.40
+#  
+#  v = rnorm(1e9) # 1000 million
 #  system.time(crossprod(v))
 #  #   user  system elapsed
 #  #   2.99    0.72   19.20
+#  system.time(sum(v*v))
+#  #   user  system elapsed
+#  #   3.25   45.71  141.76
 #  
 #  v = 1:1e6 # 1 million
 #  system.time(crossprod(v))
@@ -25,10 +25,10 @@ knitr::opts_chunk$set(echo = TRUE)
 #  system.time(sum(v*v))
 #  #   user  system elapsed
 #  #      0       0       0
-#  #Warning message:
-#  #In k * k : NAs produced by integer overflow
+#  # Warning message:
+#  # In k * k : NAs produced by integer overflow
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE------------------------------------------------------------------------
 #  x = matrix(rnorm(10000), nrow=10, ncol=1000)
 #  system.time(colSums(x*x))
 #  #   user  system elapsed
@@ -37,13 +37,13 @@ knitr::opts_chunk$set(echo = TRUE)
 #  #   user  system elapsed
 #  #   0.83    0.14    0.97
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE------------------------------------------------------------------------
 #  set.seed(42)
 #  Bbig <- matrix(rnorm(100*100), nrow=100)
 #  Bbig2 <- Bbig
 #  Bbig2[1,1] <- NA
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE------------------------------------------------------------------------
 #  th = x0 %*% ph
 #  P = drop(ph) %o% nr.ones # ph in each column, nr.ones is a vector of 1
 #  P[t(x.miss)] = 0
@@ -54,7 +54,7 @@ knitr::opts_chunk$set(echo = TRUE)
 #  #   user  system elapsed
 #  #  10.76    0.00   10.78
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE------------------------------------------------------------------------
 #  th = x0 %*% ph
 #  P = drop(ph) %o% nr.ones # ph in each column
 #  P[t(x.miss)] = 0
@@ -67,7 +67,7 @@ knitr::opts_chunk$set(echo = TRUE)
 #  all.equal(res0, res)
 #  # TRUE
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE------------------------------------------------------------------------
 #  P2 <- drop(ph*ph) %o% nr.ones # ph in each column
 #  P2[t(x.miss)] <- 0
 #  th = x0 %*% ph / colSums(P2)
@@ -79,7 +79,7 @@ knitr::opts_chunk$set(echo = TRUE)
 #  all.equal(res0, res)
 #  # TRUE
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE------------------------------------------------------------------------
 #  P2 <- matrix(ph*ph, nrow=nc, ncol=nr)
 #  P2[t(x.miss)] <- 0
 #  th = x0 %*% ph / colSums(P2)
@@ -91,7 +91,7 @@ knitr::opts_chunk$set(echo = TRUE)
 #  all.equal(res0, res)
 #  # TRUE
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE------------------------------------------------------------------------
 #  set.seed(42)
 #  P = matrix(rnorm(9), 3)
 #  PPp = P %*% t(P)
@@ -110,7 +110,7 @@ knitr::opts_chunk$set(echo = TRUE)
 #             tcrossprod(PPp, t(1:3)) )
 #  # TRUE
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE------------------------------------------------------------------------
 #  system.time(m1 <- nipals(Bbig2, ncomp=100, gramschmidt=FALSE))
 #  #   user  system elapsed
 #  #   3.68    0.02    3.70

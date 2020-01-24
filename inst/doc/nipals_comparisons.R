@@ -1,4 +1,4 @@
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE------------------------------------------------------------------------
 #  B <- matrix(c(50, 67, 90, 98, 120,
 #               55, 71, 93, 102, 129,
 #               65, 76, 95, 105, 134,
@@ -17,7 +17,7 @@
 #    all.equal( abs(a), abs(b), tol=tol, check.attributes=FALSE)
 #  }
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE------------------------------------------------------------------------
 #  library(ade4)
 #  made <- ade4::nipals(B2, nf=5, rec=TRUE, niter=500, tol=1e-9)
 #  
@@ -30,7 +30,7 @@
 #  mnip <- nipals::nipals(B2a, ncomp=5, center=FALSE, scale=FALSE,
 #                         fitted=TRUE, maxiter=500, tol=1e-9, gramschmidt=FALSE)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE------------------------------------------------------------------------
 #  # data
 #  same(B2a, as.matrix(made$tab))
 #  # TRUE
@@ -52,13 +52,13 @@
 #  # TRUE
 #  
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE------------------------------------------------------------------------
 #  library(plsdepot)
 #  mpls <- plsdepot::nipals(B2, comps=5)
 #  library(nipals)
 #  mnip <- nipals::nipals(B2a, ncomp=5, maxiter=100, tol=1e-6, gramschmidt=FALSE)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE------------------------------------------------------------------------
 #  # eigenvalues
 #  mnip$eig
 #  # [1] 4.8762167 2.0442757 1.0728055 0.2369607 0.1432779
@@ -79,13 +79,13 @@
 #  same( sweep(mnip$scores, 2, mnip$eig, "*"), mpls$scores)
 #  # TRUE
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE------------------------------------------------------------------------
 #  library(mixOmics)
 #  library(nipals)
 #  mnip <- nipals::nipals(B2, gramschmidt=FALSE)
 #  mmix <- mixOmics::nipals(scale(B2), ncomp=5)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE------------------------------------------------------------------------
 #  # eigenvalues
 #  mnip$eig
 #  mmix$eig
@@ -102,34 +102,47 @@
 #  mnip$scores
 #  mmix$t
 #  same(mnip$scores, mmix$t, tol=1e-2)
-#  TRUE
+#  # TRUE
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE------------------------------------------------------------------------
 #  set.seed(43)
 #  Bbig <- matrix(rnorm(100*100), nrow=100)
 #  Bbig2 <- Bbig
 #  Bbig2[1,1] <- NA
 
-## ---- eval=FALSE---------------------------------------------------------
-#  system.time(ade4::nipals(Bbig2, nf=1)) # Only 1 factor!
+## ---- eval=FALSE------------------------------------------------------------------------
+#  system.time(ade4::nipals(Bbig2, nf=1)) # Only 1 PC!
 #  ##  user  system elapsed
 #  ## 42.09    0.00   42.14
 
-## ---- eval=FALSE---------------------------------------------------------
-#  system.time(plsdepot::nipals(Bbig2, comps=1)) # Only 1 factor !
+## ---- eval=FALSE------------------------------------------------------------------------
+#  system.time(plsdepot::nipals(Bbig2, comps=1)) # Only 1 PC !
 #  #   user  system elapsed
 #  #    0.5     0.0     0.5
-#  system.time(plsdepot::nipals(Bbig2, comps=100)) # 100 factors
+#  system.time(plsdepot::nipals(Bbig2, comps=100)) # 100 PCs
 #  #   user  system elapsed
 #  #  30.19    0.00   30.18
 
-## ---- eval=FALSE---------------------------------------------------------
-#  system.time(mixOmics::nipals(scale(Bbig2), ncomp=100)) # 100 factors
+## ---- eval=FALSE------------------------------------------------------------------------
+#  system.time(mixOmics::nipals(scale(Bbig2), ncomp=100)) # 100 PCs
 #  #   user  system elapsed
 #  #  20.70    0.00   20.81
 
-## ---- eval=FALSE---------------------------------------------------------
-#  system.time(nipals::nipals(Bbig2, ncomp=100, gramschmidt=FALSE)) # 100 factors
+## ---- eval=FALSE------------------------------------------------------------------------
+#  system.time(nipals::nipals(Bbig2, ncomp=100, gramschmidt=FALSE)) # 100 PCs
 #  #   user  system elapsed
-#  #   2.74    0.00    2.75
+#  #   2.93    0.00    2.93
+
+## ---- eval=FALSE------------------------------------------------------------------------
+#  system.time(nipals::nipals(Bbig2, ncomp=100, gramschmidt=TRUE)) # 100 PCs
+#  #   user  system elapsed
+#  #    3.6     0.0     3.6
+
+## ---- eval=FALSE------------------------------------------------------------------------
+#  system.time(empca(Bbig2, ncomp=100, gramschmidt=FALSE)) # 100 PCs
+#  #   user  system elapsed
+#  #   1.03    0.00    1.03
+#  system.time(empca(Bbig2, ncomp=100, gramschmidt=TRUE)) # 100 PCs
+#  #   user  system elapsed
+#  #  10.44    0.00   10.45
 
