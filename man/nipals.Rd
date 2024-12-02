@@ -31,7 +31,7 @@ Missing values are allowed.}
 \item{maxiter}{Maximum number of NIPALS iterations for each
 principal component.}
 
-\item{tol}{Default 1e-9 tolerance for testing convergence of the NIPALS
+\item{tol}{Default 1e-6 tolerance for testing convergence of the NIPALS
 iterations for each principal component.}
 
 \item{startcol}{Determine the starting column of x for the iterations
@@ -57,13 +57,16 @@ A list with components \code{eig}, \code{scores}, \code{loadings},
 \code{scale}.
 }
 \description{
-Used for finding principal components of a numeric matrix.
+Used for finding principal components of a numeric matrix x.
 Missing values in the matrix are allowed.
 Principal Components are extracted one a time.  
-The algorithm computes x = TP', where T is the 'scores' matrix and P is
-the 'loadings' matrix.
+This algorithm computes x = TLP', where T is the scores matrix,
+L (Lambda) is the eigenvalue vector, and P is the loadings matrix.
 }
 \details{
+CAUTION: Different R package functions do different things with the
+L matrix. For example, some functions include L in T.
+
 The R2 values that are reported are marginal, not cumulative.
 }
 \examples{
